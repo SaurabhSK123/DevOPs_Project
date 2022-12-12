@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title> Flask CURD </title>
+</head>
+
+<body>
+    
+    <div class="jumbotron p-3">
+    
+        <div class="well text-center">
+            
+            <h2> Labours Data </h2>
+            <h4>Python Flask CURD Web App </h4>
+        
+        </div>
+    
+    </div>
+    
+
+
+<title> DashBoard </title>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col md-12">
+
+            <div class="jumbotron p-3">
+
+                <h2>Manage Labours Data </b> <button type="button" class="btn btn-success float-right"
+                data-toggle="modal" data-target="#mymodal"> Add Entry </button> </h2>
+
+
+                <div class="alert alert-success alert-dismissable" id="loading" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+
+		 
+                
+                </div>
+
+
+                <table id="data" class="table table-hover table-dark">
+                    
+
+                    <!--<tr>
+                        <td>{{ doc["ID"] }}</td>
+                        <td>{{ doc["Name"] }}</td>
+                        <td>{{ doc["Email"] }}</td>
+                        <td>{{ doc["Phone"] }}</td>
+                    -->
+                        <!-- <td> 
+                            <a href="/update/{{doc['_id']}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{doc['_id']}}">Edit</a>
+                            <a href="/delete/{{doc['Name']}}" class="btn btn-danger btn-xs" onclick="return confirm('Are you Sure to Delete ?')">Delete</a>
+                        </td> -->
+
+                    
+                  
+                    <!-- Modal Edit Employee-->
+
+
+                    <div id="modaledit{{doc['_id']}}" class="modal fade" role="dialog">
+   
+                        <div class="modal-dialog">
+ 
+                            <div class="modal-content">
+ 
+                               <div class="modal-header">
+                                    <h4 class="modal-title">Update Information</h4>
+                                </div>
+ 
+ 
+                                <div class="modal-body">
+ 
+                                    <form action="{{url_for('update')}}" method="POST">
+
+                                        <div class="form-group">
+                                            <label>ID:</label>
+                                            <input type="text"  class="form Control" name="id" value="{{ doc['id'] }}">
+                                        </div>
+ 
+                                        <div class="form-group">
+                                            <label>Name:</label>
+                                            <input type="text" class="form-control" name="name" value="{{doc['Name']}}">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label>Email:</label>
+                                            <input type="text" class="form-control" name="email" value="{{doc['Email']}}">
+                                        </div>   
+                                        
+                                        <div class="form-group">
+                                            <label>Phone:</label>
+                                            <input type="text" class="form-control" name="phone" value="{{doc['Phone']}}">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <button class="btn btn-primary" type="submit">Update</button>
+                                        </div>
+                                    
+                                    </form>
+                                </div>
+                                
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            
+                            </div>
+                        
+                        </div>
+                    
+                    </div>
+                    
+                </table>
+            
+            </div>
+
+
+            <!-- Modal Add Employee-->
+            
+                    <div id="mymodal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+       <div class="modal-content">
+          <div class="modal-header">
+  
+             <h4 class="modal-title">Add Employee</h4>
+          </div>
+          <div class="modal-body">
+  
+             <form>
+  
+                <div class="form-group">
+  
+                    <label>ID:</label>
+                    <input type="text" class="form-control" name="employee_id" id="employee_id" required="1">
+   
+   
+                 </div>
+   
+
+                <div class="form-group">
+  
+                   <label>Name:</label>
+                   <input type="text" class="form-control" name="name" id="name" required="1">
+  
+  
+                </div>
+  
+  
+                 <div class="form-group">
+  
+  
+                   <label>Email:</label>
+                   <input type="email" class="form-control" name="email" id="email" required="1">
+  
+  
+                </div>
+  
+  
+                 <div class="form-group">
+  
+  
+                   <label>Phone:</label>
+                   <input type="number" class="form-control" name="phone" id="phone" required="1">
+  
+  
+                </div>
+  
+  
+  
+                <div class="form-group">
+  
+  
+                   <button class="btn btn-primary" type="submit" onclick="submit_form();" >Add Employee</button>
+  
+  
+                </div>
+  
+  
+             </form>
+  
+  
+          </div>
+  
+  
+          <div class="modal-footer">
+  
+  
+             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  
+  
+          </div>
+  
+  
+       </div>
+  
+  
+    </div>
+  
+                    </div>
+  
+  
+  
+
+
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    function submit_form(){
+        var obj_data ={
+            employee_id:document.getElementById('employee_id').value,
+            name:document.getElementById('name').value,
+            email:document.getElementById('email').value,
+            phone:document.getElementById('phone').value 
+        }
+
+       // console.log(obj_data)
+
+
+		var settings = {
+  "url": "http://node-test/insert",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "data": JSON.stringify(obj_data),
+};
+
+$.ajax(settings).done(function (response) {
+  // console.log(response);
+    });
+}
+
+
+
+// Update UI
+
+fetch("http://node-test/get_users").then((data)=>{
+    // console.log(data);
+    return data.json();
+
+}).then((objdata)=>{
+    let tableData=`<tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Contact No.</th>
+                        <th>Action</th>
+                    </tr>`;
+    objdata.map((values)=>{
+         tableData+=`<tr>
+                        <td>${values.employee_id}</td>
+                        <td>${values.name}</td>
+                        <td>${values.email}</td>
+                        <td>${values.phone}</td>
+                    <td>
+                <a href="/update/{{doc['_id']}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{doc['_id']}}">Edit</a>
+                <button type="button" class="btn btn-danger btn-xs"  onclick="delete_user('${values.employee_id}');">Delete</button> `;
+
+    });
+    document.getElementById("data").innerHTML = tableData;
+}).catch((err)=>{
+    console.log(err)
+})
+
+
+// delete user Function
+function delete_user(id){
+    console.log(id)
+
+    var del_data ={
+            employee_id:id }
+
+       // console.log(obj_data)
+
+	var settings = {
+    "url": "http://node-test/delete",
+    "method": "POST",
+    "timeout": 0,
+    "headers": {
+    "Content-Type": "application/json"
+     },
+    "data": JSON.stringify(del_data),
+    };
+
+    $.ajax(settings).done(function (response) {
+      console.log(response);
+      if (response=="success"){
+
+       document.getElementById("myTable").deleteRow(0);
+
+      }
+      });
+function deleteRow(rw) {
+    var row = btn.parentNode.parentNode;
+    row.parentNode.removeChild(row);
+}
+
+}
+
+
+
+</script>
+
+</body>
+
+</html>

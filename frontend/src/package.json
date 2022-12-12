@@ -1,0 +1,17 @@
+{
+  "name": "CURD_web_app",
+  "version": "1.0.0",
+  "description": "Node.js on Docker",
+  "author": "Saurabh",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "connect-flash": "^0.1.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "mongoose": "^6.7.3"
+  }
+}
